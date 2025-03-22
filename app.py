@@ -41,7 +41,7 @@ def enter_queue():
         open('stand2.txt', 'w').write('\n'.join(stand2_list))
 
 def veto():
-    if name not in ['Noel', 'Mehul']:
+    if name not in ['Noel', 'Mehul','Vikranth']:
         st.write('Get the hell out!')
         return
     
