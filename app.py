@@ -5,10 +5,6 @@ stand_users = open('names.txt', 'r').read().splitlines()
 st.title('Welcome to H1 Second Floor Stand App')
 st.write('This is to prevent any conflicts and not to piss me (Noel) off')
 
-noels_answer = st.secrets["noels_answer"]
-mehuls_answer = st.secrets["mehuls_answer"]
-
-
 def view_stand1():
     st.write('Stand 1:')
     stand1 = open('stand1.txt', 'r').read().splitlines()
@@ -60,36 +56,21 @@ def veto(name):
         return
     
     with st.form(key='veto_form'):
-        if name == 'Noel':
-            answer = st.text_input("What is your mom's family name?")
+        stand1 = open('stand1.txt', 'r').read().splitlines()
+        stand2 = open('stand2.txt', 'r').read().splitlines()
+        if len(stand1) <= len(stand2):
+            stand1 = [name] + stand1
+            with open('stand1.txt', 'w') as f:
+                f.write('\n'.join(stand1))
+
+            st.write('You have been added to Stand 1')
         else:
-            answer = st.text_input('What is your your favourite meccademia prof?')
-
-        submitted = st.form_submit_button("Submit")
-        
-        if submitted:
-            if name == 'Noel' and answer.lower() == noels_answer:
-                st.write('Veto successful')
-            elif name != 'Noel' and answer.lower() == mehuls_answer:
-                st.write('Veto successful')
-            else:
-                st.write('Veto failed')
-                return
-
-            stand1 = open('stand1.txt', 'r').read().splitlines()
-            stand2 = open('stand2.txt', 'r').read().splitlines()
-            if len(stand1) <= len(stand2):
-                stand1 = [name] + stand1
-                with open('stand1.txt', 'w') as f:
-                    f.write('\n'.join(stand1))
-
-                st.write('You have been added to Stand 1')
-            else:
-                stand2 = [name] + stand2
-                with open('stand2.txt', 'w') as f:
-                    f.write('\n'.join(stand2))
-                
-                st.write('You have been added to Stand 2')
+            stand2 = [name] + stand2
+            with open('stand2.txt', 'w') as f:
+                f.write('\n'.join(stand2))
+            
+            st.write('You have been added to Stand 2')
+            
     
 name = st.text_input('Enter your name')
 
