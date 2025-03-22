@@ -109,6 +109,7 @@ button_style = """
 
 st.markdown(button_style, unsafe_allow_html=True)
 
+print(st.secrets)
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
