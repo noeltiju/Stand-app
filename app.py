@@ -55,39 +55,25 @@ def veto(name):
         st.write('Get the hell out!')
         return
     
-    noels_answer = st.secrets['noels_answer']
-    mehuls_answer = st.secrets['mehuls_answer']
-    with st.form(key='veto_form'):
-        if name == 'Noel':
-            answer = st.text_input("What is your mom's family name?")
-        else:
-            answer = st.text_input('What is your your favourite meccademia prof?')
+    stand1 = open('stand1.txt', 'r').read().splitlines()
+    stand2 = open('stand2.txt', 'r').read().splitlines()
 
-        submitted = st.form_submit_button("Submit")
+    if name in stand1 or name in stand2:
+        return
         
-        if submitted:
-            if name == 'Noel' and answer.lower() == noels_answer:
-                st.write('Veto successful')
-            elif name != 'Noel' and answer.lower() == mehuls_answer:
-                st.write('Veto successful')
-            else:
-                st.write('Veto failed')
-                return
+    if len(stand1) <= len(stand2):
+        stand1 = [name] + stand1
+        with open('stand1.txt', 'w') as f:
+            f.write('\n'.join(stand1))
 
-            stand1 = open('stand1.txt', 'r').read().splitlines()
-            stand2 = open('stand2.txt', 'r').read().splitlines()
-            if len(stand1) <= len(stand2):
-                stand1 = [name] + stand1
-                with open('stand1.txt', 'w') as f:
-                    f.write('\n'.join(stand1))
-
-                st.write('You have been added to Stand 1')
-            else:
-                stand2 = [name] + stand2
-                with open('stand2.txt', 'w') as f:
-                    f.write('\n'.join(stand2))
-                
-                st.write('You have been added to Stand 2')
+        st.write('You have been added to Stand 1')
+    else:
+        stand2 = [name] + stand2
+        with open('stand2.txt', 'w') as f:
+            f.write('\n'.join(stand2))
+        
+        st.write('You have been added to Stand 2')
+            
     
 name = st.text_input('Enter your name')
 
