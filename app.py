@@ -46,10 +46,12 @@ def enter_queue(name):
     if len(stand1_list) <= len(stand2_list):
         stand1_list.append(name)
         open('stand1.txt', 'w').write('\n'.join(stand1_list))
+        st.write('You have been added to Stand 1 after ' + stand1_list[-2])
 
     else:
         stand2_list.append(name)
         open('stand2.txt', 'w').write('\n'.join(stand2_list))
+        st.write('You have been added to Stand 2 after ' + stand2_list[-2])
 
 def veto(name):
     name = name.title()
@@ -59,7 +61,7 @@ def veto(name):
     
     with st.form(key='veto_form'):
         if name == 'Noel':
-            answer = st.text_input("What is your cousin's name?")
+            answer = st.text_input("What is your mom's family name?")
         else:
             answer = st.text_input('What is your your favourite meccademia prof?')
 
@@ -80,10 +82,14 @@ def veto(name):
                 stand1 = [name] + stand1
                 with open('stand1.txt', 'w') as f:
                     f.write('\n'.join(stand1))
+
+                st.write('You have been added to Stand 1')
             else:
                 stand2 = [name] + stand2
                 with open('stand2.txt', 'w') as f:
                     f.write('\n'.join(stand2))
+                
+                st.write('You have been added to Stand 2')
     
 name = st.text_input('Enter your name')
 
